@@ -6,18 +6,21 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * @author Tulane
  * @date 2023/3/12
  */
-public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean {
+public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean, ApplicationContextAware {
     private String brand;
     private String color;
     private int maxSpeed;
     private String name;
     private BeanFactory beanFactory;
     private String beanName;
+    private ApplicationContext applicationContext;
 
     public Car() {
         System.out.println("调用Car()构造函数。");
@@ -45,6 +48,7 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
                 ", name='" + name + '\'' +
                 ", beanFactory=" + beanFactory +
                 ", beanName='" + beanName + '\'' +
+                ", applicationContext=" + applicationContext +
                 '}';
     }
 
@@ -81,13 +85,13 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
 
     // InitializingBean接口方法
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         System.out.println("调用InitializingBean.afterPropertiesSet()。");
     }
 
     // DisposableBean接口方法
     @Override
-    public void destroy() throws Exception {
+    public void destroy() {
         System.out.println("调用DisposableBean.destory()。");
     }
 
@@ -100,4 +104,9 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
         System.out.println("调用myDestroy()。");
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+        System.out.println("调用 applicationContext");
+    }
 }
