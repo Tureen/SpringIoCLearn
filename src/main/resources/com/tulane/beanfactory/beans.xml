@@ -8,4 +8,10 @@
           destroy-method="myDestory"
           p:brand="红旗CA72"
           p:maxSpeed="200"/>
+
+    <bean id="MyBeanPostProcessor"
+          class="com.tulane.beanfactory.MyBeanPostProcessor"/>
+
+    <bean id="MyBeanFactoryPostProcessor"
+          class="com.tulane.beanfactory.MyBeanFactoryPostProcessor"/>
 </beans>
